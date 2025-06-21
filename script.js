@@ -1,26 +1,27 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
+
+/* Dizionario di prova: Codice SQ → Punti */
+const saldo = {
+  "SQ20240612MB": 5,
+  "SQ20240613LV": 8,
+  "SQ20240614AR": 3
+};
+
+function checkCode() {
+  const code = document.getElementById("codeInput").value.trim();
+  const result = document.getElementById("result");
+
+  if (!code) {
+    result.textContent = "Inserisci un codice SQ.";
+  } else if (saldo[code] != null) {
+    result.textContent = `Hai ${saldo[code]} punti SQ.`;
+  } else {
+    result.textContent = "Codice non trovato.";
+  }
 }
-.container {
-  max-width: 400px;
-  width: 100%;
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,.1);
-}
-input,button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 12px;
-  font-size: 16px;
-}
-#result {
-  margin-top: 18px;
-  font-size: 18px;
-  font-weight: bold;
-}
+
+/* Permette di premere INVIO invece di cliccare il bottone */
+document
+  .getElementById("codeInput")
+  .addEventListener("keyup", function (e) {
+    if (e.key === "Enter") checkCode();
+  });
